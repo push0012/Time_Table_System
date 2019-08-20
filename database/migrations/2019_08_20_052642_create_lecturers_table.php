@@ -17,7 +17,6 @@ class CreateLecturersTable extends Migration
             $table->bigIncrements('lecturer_id');
             $table->string('title');
             $table->string('initial');
-            $table->string('first_name');
             $table->string('last_name');
             $table->string('department');
             $table->boolean('deleted');
