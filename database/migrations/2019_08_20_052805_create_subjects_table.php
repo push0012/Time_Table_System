@@ -23,13 +23,6 @@ class CreateSubjectsTable extends Migration
             $table->string('user_data',255);
             $table->timestamps();
         });
-
-        Schema::table('subjects', function (Blueprint $table) {
-            $table->unsignedBigInteger('course_code');
-        
-            $table->foreign('course_code')->references('course_code')->on('courses')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
     }
 
     /**
