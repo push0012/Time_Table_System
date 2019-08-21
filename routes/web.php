@@ -25,3 +25,4 @@ Route::resource('lecturer', 'LecturerController');
 Route::resource('lecturer_free', 'LecturerFreeController');
 Route::resource('subject', 'SubjectController');
 Route::resource('course_subject', 'CourseSubjectController');
+Route::resource('time_slot', 'TimeSlotController');
