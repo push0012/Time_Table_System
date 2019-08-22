@@ -11,7 +11,16 @@ class CourseSubject extends Model
     //protected $primaryKey = 'subject_id';
 
     protected $fillable = [
-        'course_code','subject_id','semester','week_hours',
+        'course_code','subject_id','semester','notional_hours','lesson_hours','week_lesson_hours',
         'deleted','user_data'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            $model->lesson_hours = $model->notional_hours * 0.4;
+            $model->week_lesson_hours = ($model->notional_hours*0.4)/15;
+        });
+    }
 }
