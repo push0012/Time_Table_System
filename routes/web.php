@@ -26,3 +26,6 @@ Route::resource('lecturer_free', 'LecturerFreeController');
 Route::resource('subject', 'SubjectController');
 Route::resource('course_subject', 'CourseSubjectController');
 Route::resource('time_slot', 'TimeSlotController');
+
+
+Route::get('generate', 'TimeTableController@generate');
