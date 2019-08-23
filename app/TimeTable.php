@@ -11,7 +11,9 @@ class TimeTable extends Model
     protected $primaryKey = 'schedule_id';
 
     protected $fillable = [
-        'course_code', 'semester' ,'ac_year' ,'schedule','batch',
+        'course_code', 'semester' ,'ac_year' ,
+        'batch','subject_id','dayofweek',
+        'sizeofday','lecturer_id','classroom_id',
         'deleted','user_data'
     ];
 
