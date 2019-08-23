@@ -11,7 +11,7 @@ class CourseSubject extends Model
     //protected $primaryKey = 'subject_id';
 
     protected $fillable = [
-        'course_code','subject_id','semester','notional_hours','lesson_hours','week_lesson_hours',
+        'course_code','subject_id','semester','notional_hours','lesson_hours','week_lesson_hours','ac_year','lecturer_id',
         'deleted','user_data'
     ];
 
