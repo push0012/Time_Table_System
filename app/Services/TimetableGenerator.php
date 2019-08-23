@@ -22,7 +22,7 @@ class TimeTableGenerator {
      * Array index to use as break time
      * @var int
      */
-    protected $indexOfBreak = 5;
+    protected $indexOfBreak = 4;
 
     /**
      * Number of hours to use for break
@@ -73,7 +73,7 @@ class TimeTableGenerator {
      * Saves level wide courses
      * @var null
      */
-    protected $levelWideCourses = null;
+    //protected $levelWideCourses = null;
 
     /**
      * Individual courses represented as a whole
@@ -126,11 +126,11 @@ class TimeTableGenerator {
      * @param $courses
      * @return $this
      */
-    public function levelWideCourse($courses)
+    /*public function levelWideCourse($courses)
     {
         $this->levelWideCourses = $courses;
         return $this;
-    }
+    }*/
 
     /**
      * Initialize the timetable array object
@@ -138,7 +138,7 @@ class TimeTableGenerator {
      */
     public function initializeTimeTable()
     {
-        return $this->timeTable = array(array(), array());
+        return $this->timeTable = array(array(), array());;
     }
 
 
@@ -168,14 +168,20 @@ class TimeTableGenerator {
     private function makeChromosomes()
     {
         $chromosomes = array();
+        $r =0;
         foreach ($this->gene as $gene) {
-            for ($x = 0; $x < $gene['week_lesson_hours']; $x++) {
-                $chromosomes[] = $gene['subject_id'];
-                $chromosomes2[] = $gene['lecturer_id'];
-            }
+            
+           // for ($x = 0; $x < $cou; $x++) {
+                $chromosomes[$r][0] = $gene['subject_id'];
+                $chromosomes[$r][1] = $gene['week_lesson_hours'];
+                $chromosomes[$r][2] = $gene['lecturer_id'];
+            //}
+            $r++;
         }
         $this->chromosomes = $chromosomes;
-        $this->chromosomes2 = $chromosomes2;
+        //$this->chromosomes2 = $chromosomes2;
+        //$out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            //$out->writeln($chromosomes[2][0]);
         return $this;
     }
 
@@ -191,9 +197,9 @@ class TimeTableGenerator {
                 $indicator = $this->emptyIndicator;
                 if ($z == $this->indexOfBreak) $indicator = $this->break[$y];
 
-                if ($this->hasLevelWideCourses()) {
+                /*if ($this->hasLevelWideCourses()) {
                     if ($this->levelWideCourses[$y][$z] != '-') $indicator = $this->levelWideCourses[$y][$z];            
-                }
+                }*/
                 $this->timeTable[$y][$z] = $indicator;
 
             }
@@ -205,10 +211,10 @@ class TimeTableGenerator {
      * Checks if the level wide courses is not null
      * @return bool
      */
-    public function hasLevelWideCourses()
+   /* public function hasLevelWideCourses()
     {
         return $this->is_general == "0" ? false : true;
-    }
+    }*/
 
     /**
      * Perform the actual schedule
@@ -216,59 +222,117 @@ class TimeTableGenerator {
      */
     private function startSelection()
     {
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        
         $totalSlot = $this->daysOfWeek * $this->sizeOfDay;
         $size = count($this->chromosomes);
         
+        $seed = 1;
         for ($x = 0; $x < $size; $x++) {
-           
-            $seed = rand(1, $totalSlot);
-            //$seed = 0;
-            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-            //$out->writeln($seed);
-
+            $rou = 0;
+            
+            $counting = $this->chromosomes[$x][1];
+           //if($rou <= $counting){
             for ($y = 0; $y < $this->daysOfWeek; $y++) {
                 for ($z = 0; $z < $this->sizeOfDay; $z++) {
-
-                    if ($this->hasAssigned($seed)) continue;
-                    if ($this->isBreakTimeZone($seed)) continue;
-
-                    $row = (int) ($seed / $this->sizeOfDay);
-                    $col = $seed % $this->sizeOfDay;
                     
-                    
-                    //$out->writeln($seed);
-                    //$row = $z;
-                    //$col = $x;
-                    $out->writeln("X is ".$x);
-                    if ($this->hasLevelWideCourses() && $this->levelWideCourses[$row][$col] != '-') {
-                        $this->timeTable[$row][$col] = $this->levelWideCourses[$row][$col];
-                        $out->writeln("the result rows are ".$seed." ".$row." ".$col);
-                        $out->writeln("hello sri lanka");
-                    } else {
-                        $this->timeTable[$row][$col][0] = $this->chromosomes[$x];
-                        $this->timeTable[$row][$col][1] = $this->chromosomes2[$x];
-                        $out->writeln("hello world");
-                        $out->writeln($seed." ".$row." ".$col." ".$this->chromosomes[$x]);
-                    }
+                    if ($this->hasAssigned($seed)){
+                        $out->writeln("hasAssigned seed ".$seed);
+                        $seed = $seed +1;
+                        continue;
+                    } 
+                    /*if ($this->isBreakTimeZone($seed)){
+                        $out->writeln("isbreak zone seed ".$seed);
+                        $seed = $seed +1;
+                        continue;
+                    } */
+                    if($this->timeTable[$y][$z] == '-' && $z != 4){
+                        if($rou < $counting){
 
-                    if (isset($this->chromosomes[$x + 1])){
-                        if ($this->chromosomes[$x + 1] === $this->chromosomes[$x] && !$this->hasUsedDoublePeriods($this->chromosomes[$x])) {
+
+                            if(($rou == 0 && $z == 3) || 
+                                ($this->chromosomes[$x][1] >=3 && $z == 2 && $rou == 0) || 
+                                ($this->chromosomes[$x][1] >=3 && $z == 1 && $rou == 0) ||
+                                ($rou == 0 && $z == 7) || 
+                                ($this->chromosomes[$x][1] >=3 && $z == 5 && $rou == 0) || 
+                                ($this->chromosomes[$x][1] >=3 && $z == 6 && $rou == 0) ||
+                                ($y == 3 && ($z == 2 || $z == 3) )) {
+                                
+                                    $out->writeln("one period seed ".$seed);
+                                $seed = $seed + 1;
+                                continue;
+                            }else{
+                                $out->writeln("With subject id is here ".$this->chromosomes[$x][0]." ".$seed);
+                                $out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$seed);
+                                $s = 0;$c = 1;
+                                $this->timeTable[$y][$z] = $this->chromosomes[$x][0];
+                                $this->usedSlots[] = $seed;
+                                $seed = $seed + 1;
+                            }
+
                             
-                            $this->timeTable[$row][$col + 1][0] = $this->chromosomes[$x];
-                            $this->timeTable[$row][$col + 1][1] = $this->chromosomes2[$x];
-                            $this->hasDoublePeriod[] = $this->chromosomes[$x];
-                            $out->writeln($seed." ".$row." ".$col." ".$this->chromosomes[$x]);
+                            
 
-                        }
-                    }
 
-                    $this->usedSlots[] = $seed;
+                        }else{
+                            //$seed = $seed + 1;
+                            continue;
 
-                   // $this->selectVenue($this->chromosomes[$x], $row, $col);
+                        } 
+                        
+                    }else{
+                        $out->writeln("condition seed ".$seed);
+                        $seed = $seed + 1;
+                        continue;
+                    }   
+                    $rou=$rou+1;   
                 }
             }
+                   
+                   /* if ($this->hasAssigned($seed)) continue;
+                    
+                    if ($this->isBreakTimeZone($seed)) continue;*/
+
+                    /*$row = (int) ($seed / $this->sizeOfDay);
+                    $col = $seed % $this->sizeOfDay;*/
+                    
+                    //if($this->chromosomes[$x][0] === $this->chromosomes[$x][0])
+
+
+
+
+
+                    //$out->writeln($seed);
+                    
+                   /* $out->writeln("X is ".$x);
+                    if ($this->hasLevelWideCourses() && $this->levelWideCourses[$row][$col] != '-') {
+                        $this->timeTable[$row][$col] = $this->levelWideCourses[$row][$col];
+                    } else {*/
+                        //$this->timeTable[$row][$col] = $this->chromosomes[$x];
+                        //$this->timeTable[$row][$col][1] = $this->chromosomes2[$x];
+                        
+                   // }
+
+                    /*if (isset($this->chromosomes[$x + 1])){
+                        if ($this->chromosomes[$x + 1] === $this->chromosomes[$x] && !$this->hasUsedDoublePeriods($this->chromosomes[$x])) {
+                            
+                            $this->timeTable[$row][$col + 1] = $this->chromosomes[$x];
+                            //$this->timeTable[$row][$col + 1][1] = $this->chromosomes2[$x];
+                            $this->hasDoublePeriod[] = $this->chromosomes[$x];
+
+                        }
+                    }*/
+
+                    /*
+
+                   // $this->selectVenue($this->chromosomes[$x], $row, $col);
+               /* $col++;
+                }
+            $row++;
+            }
+        //}*/
         //}
-        }
+    }
         return $this;
     }
 
