@@ -296,7 +296,7 @@ class TimeTableGenerator {
 
         $tables = $tablesave->create([
             'course_code'   => $this->is_general,
-            'batch'         => 'B1',
+            'batch'         => 'B2',
             'semester'      => 1,
             'ac_year'       => 2019,
             'subject_id'    => $cromesom[0],
