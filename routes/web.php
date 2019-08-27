@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -29,3 +29,6 @@ Route::resource('time_slot', 'TimeSlotController');
 
 
 Route::get('generate', 'TimeTableController@generate');
+
+/*Route::get('/classroom', function(){ return view('master.classroom'); });
+Route::get('/course', function(){ return view('master.course'); });*/
