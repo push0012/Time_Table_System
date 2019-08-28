@@ -18,11 +18,11 @@
                             <h3>Add Class Room and Lab Details:</h3>
                         </div> 
                         <form method="POST" action="{{ url('classroom') }}">
-                           <div class="form-group row">
+                        <div class="form-group row">
                             <label for="classroom_name" class="col-md-4 col-form-label text-md-right">{{ __('Classroom Name') }}</label>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
                                 <input class="form-control" type="text" name="classroom_name" id="classroom_name" placeholder="Classroom Name" />
-                            </div>
+                            </div> 
                         </div>
                         <div class="form-group row">
                             <label for="location" class="col-md-4 col-form-label text-md-right">{{ __('Location') }}</label>
