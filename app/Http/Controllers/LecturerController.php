@@ -24,7 +24,7 @@ class LecturerController extends Controller
      */
     public function create()
     {
-        return view('master.lecturer');
+        return view('master.lecturer.lecturer');
     }
 
     /**
