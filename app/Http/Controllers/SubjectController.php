@@ -24,7 +24,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('master.subject');
+        return view('master.subject.subject');
     }
 
     /**
@@ -35,9 +35,11 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $subject = Subject::create($request->all());
+        //$subject = Subject::create($request->all());
 
-        return response()->json($subject, 201);
+        return response()->json($request, 201);
+
+        
     }
 
     /**
