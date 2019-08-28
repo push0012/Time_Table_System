@@ -18,7 +18,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <!-- Main CSS -->
@@ -46,8 +46,7 @@
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 </head>
 <body>
     <div id="app">
@@ -85,5 +84,8 @@
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}" type="text/javascript"></script>
     <!-- Custom Js -->
     <script src="{{ asset('js/main.js') }} " type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
+    <script src="{{ asset('js/custom.js') }} " type="text/javascript"></script>
 </body>
 </html>
