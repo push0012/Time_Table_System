@@ -1,33 +1,82 @@
 $(document).ready(function() {
-    console.log('comes here');
-var t = $('#example').DataTable({
+    //Define DataTable
+    var t = $('#example').DataTable({
     paging: false,
     searching: false,
     ordering:  false,
-    info: false
+    info: false,
+    select: 'os'
 });
-var counter = 1;
-var clicks = -1;
-  $("#addRow").click(function(){ clicks++;});
-
-var nextid=1;
+//Create rows when click the button and create form input fields
 $('#addRow').on( 'click', function () {
-    nextid = nextid + clicks;
-    console.log('comes here');
     t.row.add( [
-        '<input type=\"text\" id=\"'+nextid+'\" name=\"subject_id\" size=\"8\"/>',
-        '<input type=\"text\" id=\"'+nextid+'\" name=\"subject_title\" size=\"45\"/>',
-        '<input type=\"text\" id=\"'+nextid+'\" name=\"method\" size=\"5\"/>',
-        '<input type=\"text\" id=\"'+nextid+'\" name=\"needs\" size=\"5\"/>',
-        '<input type=\"text\" id=\"'+nextid+'\" name=\"credits\" size=\"5\"/>'
+        '<input type=\"text\" id=\"subject_id\" name=\"subject_id\" size=\"8\" required/>',
+
+        '<input type=\"text\" id=\"subject_title\" name=\"subject_title\" size=\"33\" required/>',
+
+        '<select class=\"form-control\" name=\"method\" id=\"method\">'+
+            '<option value=\"Lecture\" selected>Lecture</option>'+
+            '<option value=\"Practical\">Practical</option>'+
+        '</select>',
+
+        '<select class=\"form-control\" name=\"needs\" id=\"needs\">'+
+            '<option value=\"C/GPA\" selected>C/GPA</option>'+
+            '<option value=\"C/NGPA\">C/NGPA</option>'+
+            '<option value=\"O/NGPA\">O/NGPA</option>'+
+            '</select>',
+
+        '<input type=\"text\" id=\"credits\" name=\"credits\" size=\"5\" required/>'
         
-    ] ).node().id = 'nextid';
-    
-    t.draw( false );
-    
-    counter++;
+    ] ).draw( false );
 } );
 
 // Automatically add a first row of data
 $('#addRow').click();
+
+//select specific rows when click on row
+$('#example tbody').on( 'click', 'tr', function () {
+    if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+    }
+    else {
+        t.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+    }
 } );
+
+//remove selected row when click on remove button
+$('#remove').click( function () {
+    t.row('.selected').remove().draw( false );
+} );
+
+//save data through input fields
+$('#reddit').on('click', function() {
+    //select each rows
+    $('#example > tbody  > tr').each(function() {
+        //attached to var as one array
+        var postData = {
+            'subject_id':$(this).find('#subject_id').val(),
+            'subject_title':$(this).find('#subject_title').val(),
+            'method':$(this).find('#method').val(),
+            'needs':$(this).find('#needs').val(),
+            'credits':$(this).find('#credits').val()
+        };
+        //send data to laravel controller through post and resource route
+        $.ajax({
+            type: "POST",
+            url: '/subject',
+            data: postData,
+            success: function( msg ) {
+                console.log( msg);
+            },
+            error: function(msg) {
+                console.log(msg);
+               
+            }
+        });
+    });
+
+});
+});
+
+
