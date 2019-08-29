@@ -18,8 +18,9 @@
                                 <div class="section-title-left-dark child-size-xl title-bar item-mb">
                                     <h3>Add Subjects Here</h3>
                                 </div> 
-                                    <form method="POST" id="subjectfrm" action="{{ url('subject') }}">
-                                    <input type="button" id="addRow" value="Add Row">
+                                    <form id="subjectfrm" >
+                                        <input class="btn btn-outline-primary btn-sm" type="button" id="addRow" value="Add Subject">
+                                        <input class="btn btn-outline-danger btn-sm" type="button" id="remove" value="Remove Row">
                                     <table id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -33,8 +34,8 @@
                                     </table>
                                     <br>
                             <center>									
-							    <button class="default-big-btn" type="submit" value="Submit">Submit</button>
-                                <button class="default-big-btn form-cancel" type="submit" value="">Cancel</button>		
+							    <button class="default-big-btn" id="reddit" type="button" value="Submit">Submit</button>
+                                <button class="default-big-btn form-cancel" type="button" value="">Cancel</button>		
                             </center>
    
                                     
@@ -70,6 +71,4 @@
                 </div>
             </div>
         </section>
-
-
 @endsection
