@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subject;
+use Auth;
 
 class SubjectController extends Controller
 {
@@ -35,11 +36,11 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //$subject = Subject::create($request->all());
+        $subject = $request->all();
+        $subject["user_data"] = Auth::user()->email;
+        $resource = Subject::create($subject);
 
-        return response()->json($request, 201);
-
-        
+        return response()->json($resource, 201);
     }
 
     /**
