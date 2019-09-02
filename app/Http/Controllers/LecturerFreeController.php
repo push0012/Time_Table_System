@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lecturer_Free;
+use App\Lecturer;
+use Auth;
 
 class LecturerFreeController extends Controller
 {
@@ -24,7 +26,8 @@ class LecturerFreeController extends Controller
      */
     public function create()
     {
-        //
+        $lecturer =  Lecturer::all();
+        return view('master.lecturer.timeslot')->with('lecturers', $lecturer);
     }
 
     /**
@@ -35,9 +38,15 @@ class LecturerFreeController extends Controller
      */
     public function store(Request $request)
     {
-        $lecturer_free = Lecturer_Free::create($request->all());
-
-        return response()->json($lecturer_free, 201);
+        
+        //$freetime =
+        
+        $response = Lecturer_Free::create([
+            'free_time' => implode(",",$request->free_time),
+            //'user_data' => Auth::user()->email,
+            'lecturer_id' => $request->lecturer_id
+            ]);
+        return response()->json($response, 201);
     }
 
     /**
