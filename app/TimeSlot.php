@@ -11,7 +11,9 @@ class TimeSlot extends Model
     protected $primaryKey = 'slot_id';
 
     protected $fillable = [
-        'day_id','day_name','start_time','end_time',
-        'deleted','user_data'
+        'dayofweek','sizeofday','start_time','end_time'
     ];
+
+    public $timestamps = false;
+
 }
