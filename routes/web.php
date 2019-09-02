@@ -29,6 +29,6 @@ Route::resource('time_slot', 'TimeSlotController');
 
 
 Route::get('generate', 'TimeTableController@generate');
-
+Route::get('viewtimetable', 'TimeTableController@viewTimeTable');
 /*Route::get('/classroom', function(){ return view('master.classroom'); });
 Route::get('/course', function(){ return view('master.course'); });*/
