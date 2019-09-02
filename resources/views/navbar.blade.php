@@ -63,7 +63,7 @@
                                                     <div class="col-sm-3">
                                                         <ul class="rt-mega-items">
                                                             <li><a href="{{ url('subject/create') }}">Subject</a></li>
-                                                            <li><a href="timeframe.html">Time Slots</a></li>
+                                                            <li><a href="{{ url('lecturer_free/create') }}">Free Times</a></li>
 
                                                         </ul>
                                                     </div>
