@@ -15,6 +15,7 @@ class CreateLecturerFreesTable extends Migration
     {
         Schema::create('lecturer_frees', function (Blueprint $table) {
             $table->string('free_time');
+            $table->string('user_data',255);
             $table->timestamps();
         });
 
