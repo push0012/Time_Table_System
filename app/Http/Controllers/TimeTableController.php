@@ -55,4 +55,9 @@ class TimeTableController extends Controller
             return response()->json($e, 400);
         }
     }
+
+    public function viewTimeTable(){
+        $timetables =  TimeTable::all();
+        return view('genarate.timetable')->with('timetables', $timetables);;
+    }
 }
