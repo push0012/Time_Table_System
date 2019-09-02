@@ -15,13 +15,10 @@ class CreateTimeSlotsTable extends Migration
     {
         Schema::create('time_slots', function (Blueprint $table) {
             $table->bigIncrements('slot_id');
-            $table->integer('day_id');
-            $table->string('day_name');
+            $table->integer('dayofweek');
+            $table->string('sizeofday');
             $table->time('start_time');
             $table->time('end_time');
-            $table->boolean('deleted');
-            $table->string('user_data',255);
-            $table->timestamps();
         });
     }
 
