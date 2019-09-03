@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subject;
+use App\Course;
+use App\CourseSubject;
 use Auth;
 
 class SubjectController extends Controller
@@ -25,7 +27,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('master.subject.subject');
+        $courses = Course::all();
+        return view('master.subject.subject')->with('courses',$courses);
     }
 
     /**
@@ -36,11 +39,28 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $subject = $request->all();
-        $subject["user_data"] = Auth::user()->email;
-        $resource = Subject::create($subject);
+        //$subject = $request->all();
+        //$subject["user_data"] = Auth::user()->email;
+        $resource = Subject::create([
+            'subject_id'=>$request->subject_id,
+            'subject_title'=>$request->subject_title,
+            'method'=>$request->method,
+            'needs'=>$request->needs,
+            'credits'=>$request->credits,
+            'user_data'=>Auth::user()->email,
+        ]);
 
-        return response()->json($resource, 201);
+        $resource2 = CourseSubject::create([
+            'semester'=>$request->semester,
+            'notional_hours'=>$request->credits*25,
+            'course_code'=>$request->course_code,
+            'subject_id'=>$request->subject_id,
+            'ac_year'=>$request->ac_year,
+            'lecturer_id'=>$request->lecturer_id,
+            'user_data'=>Auth::user()->email,
+        ]);
+
+        return response()->json($resource2, 201);
     }
 
     /**
