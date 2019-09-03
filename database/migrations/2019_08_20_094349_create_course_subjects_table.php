@@ -15,10 +15,16 @@ class CreateCourseSubjectsTable extends Migration
     {
         Schema::create('course_subjects', function (Blueprint $table) {
             $table->integer('semester');
-            $table->integer('week_hours');//lecture practicle
+            $table->integer('notional_hours');
+            $table->integer('lesson_hours');
+            $table->integer('week_lesson_hours');
+            $table->year('ac_year');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->boolean('deleted');
             $table->string('user_data',255);
             $table->timestamps();
+            $table->string('subject_id',10);
         });
 
         Schema::table('course_subjects', function (Blueprint $table) {
@@ -28,10 +34,17 @@ class CreateCourseSubjectsTable extends Migration
             ->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('course_subjects', function (Blueprint $table) {
-            $table->string('subject_id',10);
+        /*Schema::table('course_subjects', function (Blueprint $table) {
+            
         
             $table->foreign('subject_id')->references('subject_id')->on('subjects')
+            ->onDelete('cascade')->onUpdate('cascade');
+        });*/
+
+        Schema::table('course_subjects', function (Blueprint $table) {
+            $table->unsignedBigInteger('lecturer_id');
+        
+            $table->foreign('lecturer_id')->references('lecturer_id')->on('lecturers')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }
