@@ -19,8 +19,8 @@ class CourseSubject extends Model
     {
         parent::boot();
         static::saving(function ($model) {
-            $model->lesson_hours = $model->notional_hours * 0.4;
-            $model->week_lesson_hours = ($model->notional_hours*0.4)/15;
+            $model->lesson_hours = ceil($model->notional_hours * 0.4);
+            $model->week_lesson_hours = ceil(($model->notional_hours*0.4)/15);
         });
     }
 }
