@@ -55,7 +55,7 @@ $('#addRow').on( 'click', function () {
     t.row.add( [
         '<input type=\"text\" id=\"subject_id\" name=\"subject_id\" size=\"8\" required/>',
 
-        datalist.append()
+        
   
         
     ] ).draw( false );
