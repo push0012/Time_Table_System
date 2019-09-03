@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     //Define DataTable
     var t = $('#example').DataTable({
     paging: false,
@@ -7,6 +8,23 @@ $(document).ready(function() {
     info: false,
     select: 'os'
 });
+
+//Call Lecturer Name List
+$.ajax({
+    type: "GET",
+    url: '/lecturer',
+    //data: data,
+    success: function( msg ) {
+        $.each(msg, function(value,key) {   
+            $("#lecturer_id").append($("<option>").attr("value", key.lecturer_id).text(key.title+" "+key.last_name+" "+key.initial));
+        });
+    },
+    error: function(msg) {
+        console.log(msg);
+       
+    }
+});
+
 //Create rows when click the button and create form input fields
 $('#addRow').on( 'click', function () {
     t.row.add( [
@@ -23,6 +41,9 @@ $('#addRow').on( 'click', function () {
             '<option value=\"C/GPA\" selected>C/GPA</option>'+
             '<option value=\"C/NGPA\">C/NGPA</option>'+
             '<option value=\"O/NGPA\">O/NGPA</option>'+
+            '</select>',
+
+        '<select class=\"form-control\" name=\"lecturer_id\" id=\"lecturer_id\">'+
             '</select>',
 
         '<input type=\"text\" id=\"credits\" name=\"credits\" size=\"5\" required/>'
@@ -54,12 +75,17 @@ $('#reddit').on('click', function() {
     //select each rows
     $('#example > tbody  > tr').each(function() {
         //attached to var as one array
+
         var postData = {
             'subject_id':$(this).find('#subject_id').val(),
             'subject_title':$(this).find('#subject_title').val(),
             'method':$(this).find('#method').val(),
             'needs':$(this).find('#needs').val(),
-            'credits':$(this).find('#credits').val()
+            'lecturer_id':$(this).find('#lecturer_id').val(),
+            'credits':$(this).find('#credits').val(),
+            'course_code' :$('#course_code').val(),
+            'ac_year' :$('#ac_year').val(),
+            'semester' :$('#semester').val()
         };
         //send data to laravel controller through post and resource route
         $.ajax({
@@ -78,5 +104,4 @@ $('#reddit').on('click', function() {
 
 });
 });
-
 
