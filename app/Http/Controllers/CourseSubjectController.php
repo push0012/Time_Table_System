@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CourseSubject;
+use App\Subject;
+use App\Course;
+use Auth;
 
 class CourseSubjectController extends Controller
 {
@@ -24,7 +27,8 @@ class CourseSubjectController extends Controller
      */
     public function create()
     {
-        //
+        $courses = Course::all();
+        return view('genarate.planning')->with('courses',$courses);
     }
 
     /**
