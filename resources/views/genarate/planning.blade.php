@@ -74,6 +74,7 @@
                                 <thead>
                                     <tr>
                                         <th >Subject ID</th>
+                                        <th >Credits</th>
                                         <th >Lecturer</th>
                                     </tr>
                                 </thead>
