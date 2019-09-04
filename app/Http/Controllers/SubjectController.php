@@ -49,18 +49,8 @@ class SubjectController extends Controller
             'credits'=>$request->credits,
             'user_data'=>Auth::user()->email,
         ]);
-
-        $resource2 = CourseSubject::create([
-            'semester'=>$request->semester,
-            'notional_hours'=>$request->credits*25,
-            'course_code'=>$request->course_code,
-            'subject_id'=>$request->subject_id,
-            'ac_year'=>$request->ac_year,
-            'lecturer_id'=>$request->lecturer_id,
-            'user_data'=>Auth::user()->email,
-        ]);
-
-        return response()->json($resource2, 201);
+        
+        return response()->json($resource, 201);
     }
 
     /**
