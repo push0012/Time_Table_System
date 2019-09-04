@@ -9,7 +9,7 @@ use App\Lecturer;
 use App\Lecturer_Free;
 use App\Course;
 use App\TimeTable;
-
+use DB;
 use App\Services\TimeTableGenerator;
 
 use Illuminate\Http\Request;
@@ -57,7 +57,8 @@ class TimeTableController extends Controller
     }
 
     public function viewTimeTable(){
-        $timetables =  TimeTable::all();
+        $timetables = DB::table('final_timetable')->get();
+        //$timetables =  TimeTable::all();
         return view('genarate.timetable')->with('timetables', $timetables);;
     }
 }
