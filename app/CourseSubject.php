@@ -12,6 +12,7 @@ class CourseSubject extends Model
 
     protected $fillable = [
         'course_code','subject_id','semester','notional_hours','lesson_hours','week_lesson_hours','ac_year','lecturer_id',
+        'start_date','end_date',
         'deleted','user_data'
     ];
 
