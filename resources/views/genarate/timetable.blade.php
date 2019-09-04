@@ -22,20 +22,23 @@
                                 <table class="table" border="1" style="width:100%">
                                     <thead>
                                         <tr class="bg-success">
-                                            <th style="max-width:15px;" >Start Time</th>
-                                            <th style="max-width:80px;">Monday</th>
-                                            <th style="max-width:80px;">Tuesday</th>
-                                            <th style="max-width:80px;">Wednesday</th>
-                                            <th style="max-width:80px;">Thursday</th>
-                                            <th style="max-width:80px;">Friday</th>
+                                            <th style="width:35px;" >Start Time</th>
+                                            <th style="width:80px;">Monday</th>
+                                            <th style="width:80px;">Tuesday</th>
+                                            <th style="width:80px;">Wednesday</th>
+                                            <th style="width:80px;">Thursday</th>
+                                            <th style="width:80px;">Friday</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr >
                                             <td>8.30</td>
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 0)
-                                            <td>{{ $timetable->subject_id." & ".$timetable->lecturer_id }}</td>
+                                            <td >
+                                                <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
+                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                            </td>
                                             @endif
                                             @endforeach
 
@@ -48,11 +51,14 @@
                                             <td>9.30</td>
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 1)
-                                            <td>{{ $timetable->subject_id." & ".$timetable->lecturer_id }}</td>
+                                            <td>
+                                                <p>{{ $timetable->subject_title }} ( {{$timetable->method}} ) </p>
+                                                <p>{{ $timetable->last_name }} ( {{ $timetable->classroom_name }} ) </p>
+                                            </td>
                                             @endif
                                             @endforeach
                                             
-                                            
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
