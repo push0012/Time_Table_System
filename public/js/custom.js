@@ -18,52 +18,43 @@ var s = $('#subjectTable').DataTable({
     select: 'os'
 });
 
-
-//$('#addRow').click();
-//Call Lecturer Name List
-function getLecturer(){
-    var result =document.createElement('SELECT');
-    result.setAttribute("id","lecturer_id");
+//automattically create lecturer dropdown 
 $.ajax({
     type: "GET",
     url: '/lecturer',
-    //data: data,
     success: function( msg ) {
-        
         $.each(msg, function(value,key) {  
-            
-            $('#lecturer_id').append($("<option>").attr("value", key.lecturer_id).text(key.title+" "+key.last_name+" "+key.initial));
-           
+            $("#lecturer_id").append($("<option>").attr("value", key.lecturer_id).text(key.title+" "+key.last_name+" "+key.initial));   
         });
     },
     error: function(msg) {
         console.log(msg);
-       
     }
 });
-return result;
-//console.log(result);
+//generate first row
+t.row.add( [
+    '<input type=\"text\" id=\"subject_id\" name=\"subject_id\" size=\"8\" required/>',
+    '<input type=\"text\" id=\"credits\" name=\"credits\" size=\"8\" required/>',
+    '<select class=\"form-control\" name=\"lecturer_id\" id=\"lecturer_id\">'+
+    '</select>',
+] ).draw( false );
+
+
+//clone first generated row and generate second row
+function getloder(){
+    var $tableBody = $('#example').find("tbody"),
+    $trLast = $tableBody.find("tr:last"),
+    $trNew = $trLast.clone();
+    $trLast.after($trNew);
 }
 
-
-//Couese_Subject Table
-//Create rows when click the button and create form input fields only for course_subject table
+//call to clone and generate tr with input fields
 $('#addRow').on( 'click', function () {
-   var datalist = getLecturer();
-    console.log(datalist);
-
-    t.row.add( [
-        '<input type=\"text\" id=\"subject_id\" name=\"subject_id\" size=\"8\" required/>',
-
-        
-  
-        
-    ] ).draw( false );
-    
-    
+    getloder();
 } );
+
 // Automatically add a first row of data
-$('#addRow').click();
+$('#addRows').click();
 
 //Subject Table
 //Create rows when click the button and create form input fields only for Subject table
@@ -91,8 +82,6 @@ $('#addSubject').on( 'click', function () {
 
 // Automatically add a first row of data
 $('#addSubject').click();
-
-
 
 //Course_Subject Table
 //select specific rows when click on row
@@ -135,6 +124,7 @@ $('#reddit').on('click', function() {
 
         var postData = {
             'subject_id':$(this).find('#subject_id').val(),
+            'credits':$(this).find('#credits').val(),
             'lecturer_id':$(this).find('#lecturer_id').val(),
             'course_code' :$('#course_code').val(),
             'ac_year' :$('#ac_year').val(),
@@ -142,6 +132,8 @@ $('#reddit').on('click', function() {
             'start_date' :$('#start_date').val(),
             'end_date' :$('#end_date').val()
         };
+
+        console.log(postData);
         //send data to laravel controller through post and resource route
         $.ajax({
             type: "POST",
