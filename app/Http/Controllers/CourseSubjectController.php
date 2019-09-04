@@ -39,9 +39,20 @@ class CourseSubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $courseSubject = CourseSubject::create($request->all());
+       // $courseSubject = CourseSubject::create($request->all());
 
-        return response()->json($courseSubject, 201);
+        $resource = CourseSubject::create([
+            'semester'=>$request->semester,
+            'notional_hours'=>$request->credits*25,
+            'course_code'=>$request->course_code,
+            'subject_id'=>$request->subject_id,
+            'ac_year'=>$request->ac_year,
+            'start_date' =>$request->start_date,
+            'end_date' =>$request->end_date,
+            'lecturer_id'=>$request->lecturer_id,
+            'user_data'=>Auth::user()->email,
+        ]);
+        return response()->json($resource, 201);
     }
 
     /**
