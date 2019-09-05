@@ -57,6 +57,7 @@
                                     <center>
                                         <button class="default-big-btn" type="submit" value="Login">Submit</button>
                                         <button class="default-big-btn form-cancel" type="reset" value="">Cancel</button>
+                                        <a class="default-big-btn form-cancel" href="{{url('course')}}" value="">Back</a>
                                     </center>
                             </div>
                         </div>
