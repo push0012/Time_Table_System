@@ -36,7 +36,13 @@ class TimeTableController extends Controller
         try{
             $timeTable =  new TimeTableGenerator($coz_subs);
             //$timeTable->levelWideCourse(json_decode($levelWideCourses, true));
-            $timeTable = $timeTable->generate($condition['course_code']);
+            $timeTable = $timeTable->generate(
+                $condition['course_code'],
+                $condition['semester'],
+                $condition['ac_year'],
+                $condition['start_date'],
+                $condition['end_date']
+            );
 
             /*if ($table->alreadyHas($condition)) {
                 $table->where($condition)->update(['schedule' => json_encode($timeTable) ]);
@@ -57,7 +63,7 @@ class TimeTableController extends Controller
     }
 
     public function viewTimeTable(){
-        $timetables = DB::table('final_timetable')->get();
+        $timetables = DB::table('final_timeltable')->get();
         //$timetables =  TimeTable::all();
         return view('genarate.timetable')->with('timetables', $timetables);;
     }
