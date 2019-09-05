@@ -11,7 +11,7 @@ class Lecturer extends Model
     protected $primaryKey = 'lecturer_id';
 
     protected $fillable = [
-        'title','initial','last_name','department',
+        'title','initial','last_name','short_name','department',
         'deleted','user_data'
     ];
 }
