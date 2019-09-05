@@ -37,7 +37,7 @@
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 0)
                                                 <p style="line-height:25px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             @endif
                                             @endforeach
                                             </td>
@@ -46,7 +46,7 @@
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 0)
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             @endif
                                             @endforeach
                                             </td>
@@ -54,7 +54,7 @@
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 0)
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             @endif
                                             @endforeach
                                             </td>
@@ -62,7 +62,7 @@
                                             @foreach($timetables as $timetable)
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 0)
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -72,7 +72,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 0)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -87,7 +87,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 1)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -98,7 +98,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 1)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -108,7 +108,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 1)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -118,7 +118,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 1)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -128,7 +128,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 1)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -141,7 +141,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 2)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -151,7 +151,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 2)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -161,7 +161,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 2)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -171,7 +171,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 2)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -181,7 +181,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 2)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -194,7 +194,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 3)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -204,7 +204,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 3)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -214,7 +214,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 3)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -224,7 +224,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 3)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -234,7 +234,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 3)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -256,7 +256,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 5)
                                            
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -266,7 +266,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 5)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -276,7 +276,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 5)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -286,7 +286,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 5)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -296,7 +296,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 5)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -309,7 +309,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 6)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                            
                                             @endif
                                             @endforeach
@@ -319,7 +319,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 6)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -329,7 +329,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 6)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -339,7 +339,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 6)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -349,7 +349,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 6)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -362,7 +362,7 @@
                                             @if ($timetable->dayofweek == 0 && $timetable->sizeofday == 7)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -372,7 +372,7 @@
                                             @if ($timetable->dayofweek == 1 && $timetable->sizeofday == 7)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -382,7 +382,7 @@
                                             @if ($timetable->dayofweek == 2 && $timetable->sizeofday == 7)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -392,7 +392,7 @@
                                             @if ($timetable->dayofweek == 3 && $timetable->sizeofday == 7)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
@@ -402,7 +402,7 @@
                                             @if ($timetable->dayofweek == 4 && $timetable->sizeofday == 7)
                                             
                                                 <p style="line-height:15px; margin: 0px 0px 0px 0px;">{{ $timetable->subject_title }} ( {{$timetable->method}} )</p>
-                                                <p style="line-height:15px;">{{$timetable->last_name }} ( {{$timetable->classroom_name }} )</p>
+                                                <p style="line-height:15px;">{{$timetable->short_name }} ( {{$timetable->classroom_name }} )</p>
                                             
                                             @endif
                                             @endforeach
