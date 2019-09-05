@@ -8,7 +8,7 @@ class Subject extends Model
 {
     protected $table = 'subjects';
 
-    protected $primaryKey = 'subject_id';
+    //protected $primaryKey = 'subject_id';
 
     protected $fillable = [
         'subject_id','subject_title','method','needs','credits',
