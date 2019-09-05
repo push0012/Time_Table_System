@@ -15,7 +15,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return Course::all();
+        $courses = Course::all();
+        return view('master.course.viewcourse')->with('courses',$courses);
     }
 
     /**
@@ -64,7 +65,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $courses = Course::findOrFail($id);
+        return view('master.course.editcourse')->with('courses',$courses);
     }
 
     /**
@@ -76,7 +78,16 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::where('course_code', $id)->first();
+        $course->course_name = $request->course_name;
+        $course->section = $request->section;
+        $course->max_no_students = $request->max_no_students;
+        $course->course_hours = $request->course_hours;
+        $course->department = $request->department;
+        $course->save();
+
+        $courses = Course::all();
+        return redirect('/course')->with('success', 'Stock has been updated');
     }
 
     /**

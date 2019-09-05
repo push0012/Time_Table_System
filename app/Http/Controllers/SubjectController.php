@@ -17,7 +17,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return Subject::all();
+        $subjects =  Subject::all();
+        
+        return view('master.subject.viewsubject')->with('subjects',$subjects);
     }
 
     /**

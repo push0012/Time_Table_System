@@ -14,7 +14,8 @@ class LecturerController extends Controller
      */
     public function index()
     {
-       return Lecturer::all();
+       $lecturers =  Lecturer::all();
+       return view('master.lecturer.viewlecturer')->with('lecturers',$lecturers);
     }
 
     /**
@@ -63,7 +64,8 @@ class LecturerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lecturers = Lecturer::findOrFail($id);
+        return view('master.lecturer.editlecturer')->with('lecturers',$lecturers);
     }
 
     /**
@@ -75,7 +77,16 @@ class LecturerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lecturer = Lecturer::where('lecturer_id', $id)->first();
+        $lecturer->title = $request->title;
+        $lecturer->initial = $request->initial;
+        $lecturer->last_name = $request->last_name;
+        $lecturer->short_name = $request->short_name;
+        $lecturer->department = $request->department;
+        $lecturer->save();
+
+        $$lecturer = Lecturer::all();
+        return redirect('/lecturer')->with('success', 'Stock has been updated');
     }
 
     /**
