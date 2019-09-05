@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Classroom;
 use App\Course;
+use App\Course_Subject;
 use App\Subject;
 use App\TimeTable;
 use App\TimeSlot;
 use App\Lecturer_Free;
+use App\RoomAllocation;
 use Auth;
 
 class TimeTableGenerator {
@@ -54,6 +56,11 @@ class TimeTableGenerator {
      * @var
      */
     protected $is_general;
+
+    protected $this_semester;
+    protected $this_ac_year;
+    protected $this_start_date;
+    protected $this_end_date;
 
     /**
      * The timetable object to store the final result
@@ -154,12 +161,19 @@ class TimeTableGenerator {
      * @param $dept
      * @return \array[][]
      */
-    public function generate($course_code)
+    public function generate($course_code,$semester,$ac_year,$start_date,$end_date)
     {
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        
         $this->is_general = $course_code;
+        $this->this_semester = $semester;
+        $this->this_ac_year = $ac_year;
+        $this->this_start_date = $start_date;
+        $this->this_end_date = $end_date;
         /*if (!$this->slotsAreEnough()) {
             abort(500, 'The number of units exceed the available spaces.');
         }*/
+        $out->writeln("It passed here");
         $this->makeChromosomes();
         $this->createInitialGeneration();
         $this->startSelection();
@@ -248,17 +262,17 @@ class TimeTableGenerator {
 
 
                     if ($this->hasAssigned($slotnum)){
-                        $out->writeln("hasAssigned seed ".$slotnum);
+                        //$out->writeln("hasAssigned seed ".$slotnum);
                         continue;
                     } 
 
                     if ($this->isBreakTimeZone($z)){
-                        $out->writeln("isbreak zone seed ".$z);
+                        //$out->writeln("isbreak zone seed ".$z);
                         continue;
                     }
                     //$out->writeln($this->isLecturerFree($slotnum, 5));
                     if (!($this->isLecturerFree($slotnum, $this->chromosomes[$x][2]))){
-                        $out->writeln("Lecturer does not free seed ".$slotnum);
+                        //$out->writeln("Lecturer does not free seed ".$slotnum);
                         continue;
                     }
 
@@ -274,12 +288,12 @@ class TimeTableGenerator {
                                 ($this->chromosomes[$x][1] >=3 && $y == 3 &&  $z == 0 && $rou == 0) ||
                                 ($y == 3 && ($z == 2 || $z == 3) )) {
                                 
-                                    $out->writeln("one period seed ".$slotnum);
+                                    //$out->writeln("one period seed ".$slotnum);
                                 //$seed = $seed + 1;
                                 continue;
                             }else{
-                                $out->writeln("With subject id is here ".$this->chromosomes[$x][0]." ".$slotnum);
-                                $out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$slotnum);
+                                //$out->writeln("With subject id is here ".$this->chromosomes[$x][0]." ".$slotnum);
+                                //$out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$slotnum);
                                 $s = 0;$c = 1;
                                 $this->timeTable[$y][$z] = $this->chromosomes[$x][0];
                                 $this->savedata($this->chromosomes[$x], $y, $z,$slotnum);
@@ -302,6 +316,7 @@ class TimeTableGenerator {
     public function savedata($cromesom, $y, $z,$slotnum){
 
         $tablesave = new TimeTable();
+        $room = new RoomAllocation();
 
         $place = $this->selectClassroom($cromesom[0], $slotnum);
 
@@ -317,20 +332,59 @@ class TimeTableGenerator {
             'classroom_id'  => $place,
 
         ]);
+        $Allocation = $room->create([
+            'start_date'    => $this->this_start_date,
+            'end_date'      => $this->this_end_date,
+            'ac_year'       => $this->this_ac_year,
+            'subject_id'    => $cromesom[0],
+            'course_code'   => $this->is_general,
+            'classroom_id'  => $place,
+            'slot_id'       => $slotnum
+        ]);
 
         return $this;
     }
 
     public function selectClassroom($subject, $slotnum){
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
         $lectureMethod = Subject::select('method')->where('subject_id',$subject)->first();
         $courseStudents = Course::select('max_no_students')->where('course_code',$this->is_general)->first();
-
+        
         $method = $lectureMethod->method;
         $students = $courseStudents->max_no_students;
 
-        $classrooms = Classroom::select('classroom_id')->where('method', $method)
+        $roomAllcoation = RoomAllocation::where('start_date',$this->this_start_date)
+        ->where('end_date',$this->this_end_date)
+        ->where('ac_year', $this->this_ac_year)
+        ->where('slot_id',$slotnum)->where('method',$method)->get()->count();
+        $out->writeln("room allocation count is ".$roomAllcoation);
+
+        
+
+        if($roomAllcoation > 0){
+            $out->writeln("room allocation count is passed second option");
+            $classrooms = Classroom::select('classroom_id')->where('method', $method)
+        ->where('student_capacity','>=',$students)->get();
+        
+            $roomAllcoation = RoomAllocation::select('classroom_id')->where('start_date',$this->this_start_date)
+        ->where('end_date',$this->this_end_date)
+        ->where('ac_year', $this->this_ac_year)
+        ->where('slot_id',$slotnum)->where('method',$method)->get();
+
+        $result = array_diff($roomAllcoation->classroom_id, $classrooms->classroom_id);
+
+        $final_result = $result[0];
+
+
+        }else{
+            $out->writeln("room allocation count is passed first option");
+            $classroomsss = Classroom::select('classroom_id')->where('method', $method)
         ->where('student_capacity','>=',$students)->first();
-        return $classrooms->classroom_id;
+        $final_result = $classroomsss->classroom_id;
+        }
+
+        return $final_result;
+
     }
 
     public function isLecturerFree($seed, $lecturer_id){
