@@ -14,7 +14,8 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        return Classroom::all();
+        $classrooms = Classroom::all();
+        return view('master.classroom.viewclassroom')->with('classrooms',$classrooms);
     }
 
     /**
@@ -61,7 +62,8 @@ class ClassroomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $classrooms = Classroom::findOrFail($id);
+        return view('master.classroom.editclassroom')->with('classrooms',$classrooms);
     }
 
     /**
@@ -73,7 +75,16 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $classroom = Classroom::where('classroom_id', $id)->first();
+        $classroom->classroom_name = $request->classroom_name;
+        $classroom->location = $request->location;
+        $classroom->student_capacity = $request->student_capacity;
+        $classroom->method = $request->method;
+        $classroom->save();
+
+        $classrooms = Classroom::all();
+        //return view('master.classroom.viewclassroom')->with('classrooms',$classrooms);
+        return redirect('/classroom')->with('success', 'Stock has been updated');
     }
 
     /**
