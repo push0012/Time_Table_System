@@ -241,8 +241,8 @@ class TimeTableGenerator {
                 for ($z = 0; $z < $this->sizeOfDay; $z++) {
 
 
-                    $tslot = $this->findTimeSlot($y,$z);
-                    $slotnum = $tslot->slot_id;
+                    $slotnum = $this->findTimeSlot($y,$z);
+                    //$out->writeln("hasAssigned seed ".$slotnum);
 
 
                     if ($this->hasAssigned($slotnum)){
@@ -254,11 +254,11 @@ class TimeTableGenerator {
                         $out->writeln("isbreak zone seed ".$z);
                         continue;
                     }
-
-                    if ($this->isLecturerFree($slotnum, $this->chromosomes[$x][2])){
+                    //$out->writeln($this->isLecturerFree($slotnum, 5));
+                    if (!($this->isLecturerFree($slotnum, $this->chromosomes[$x][2]))){
                         $out->writeln("Lecturer does not free seed ".$slotnum);
                         continue;
-                    } 
+                    }
 
                         if($rou < $counting){
 
@@ -267,8 +267,9 @@ class TimeTableGenerator {
                                 ($this->chromosomes[$x][1] >=3 && $z == 2 && $rou == 0) || 
                                 ($this->chromosomes[$x][1] >=3 && $z == 1 && $rou == 0) ||
                                 ($rou == 0 && $z == 7) || 
-                                ($this->chromosomes[$x][1] >=3 && $z == 5 && $rou == 0) || 
+                                ($this->chromosomes[$x][1] >3 && $z == 5 && $rou == 0) || 
                                 ($this->chromosomes[$x][1] >=3 && $z == 6 && $rou == 0) ||
+                                ($this->chromosomes[$x][1] >=3 && $y == 3 &&  $z == 0 && $rou == 0) ||
                                 ($y == 3 && ($z == 2 || $z == 3) )) {
                                 
                                     $out->writeln("one period seed ".$slotnum);
@@ -319,17 +320,35 @@ class TimeTableGenerator {
     public function isLecturerFree($seed, $lecturer_id){
         
         $lecturer_frees = Lecturer_Free::select('free_time')->where('lecturer_id',$lecturer_id)->first();
+        $temp = $lecturer_frees->free_time;
+        $temp2 = explode(",", $temp);  
+        $freetimes = $this->bubble_Sort($temp2);
 
-        $freetimes[] = $lecturer_frees->free_time;
-        
-        return in_array($seed,$freetimes);
+        return in_array($seed , $freetimes);
+    }
+    public function bubble_Sort($my_array)
+    {
+            do
+            {
+                $swapped = false;
+                for( $i = 0, $c = count( $my_array ) - 1; $i < $c; $i++ )
+                {
+                    if( $my_array[$i] > $my_array[$i + 1] )
+                    {
+                        list( $my_array[$i + 1], $my_array[$i] ) =
+                                array( $my_array[$i], $my_array[$i + 1] );
+                        $swapped = true;
+                    }
+                }
+            }
+            while( $swapped );
+        return $my_array;
     }
 
     public function findTimeSlot($dayofweek,$sizeofday){
         $timeslots = TimeSlot::select('slot_id')->where('dayofweek', $dayofweek)
         ->where('sizeofday', $sizeofday)->first();
-        
-        return $timeslots;
+        return $timeslots->slot_id;
     }
     /**
      * Check if the seed falls withing the break time zone
