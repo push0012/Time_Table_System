@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Classroom;
+use App\Course;
+use App\Subject;
 use App\TimeTable;
 use App\TimeSlot;
 use App\Lecturer_Free;
@@ -280,7 +282,7 @@ class TimeTableGenerator {
                                 $out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$slotnum);
                                 $s = 0;$c = 1;
                                 $this->timeTable[$y][$z] = $this->chromosomes[$x][0];
-                                //$this->savedata($this->chromosomes[$x], $y, $z);
+                                $this->savedata($this->chromosomes[$x], $y, $z,$slotnum);
                                 $this->usedSlots[] = $slotnum;
                                 //$seed = $seed + 1;
                             }
@@ -297,9 +299,11 @@ class TimeTableGenerator {
         return $this;
     }
 
-    public function savedata($cromesom, $y, $z){
+    public function savedata($cromesom, $y, $z,$slotnum){
 
         $tablesave = new TimeTable();
+
+        $place = $this->selectClassroom($cromesom[0], $slotnum);
 
         $tables = $tablesave->create([
             'course_code'   => $this->is_general,
@@ -310,11 +314,23 @@ class TimeTableGenerator {
             'dayofweek'     => $y,
             'sizeofday'     => $z,
             'lecturer_id'   => $cromesom[2],
-            'classroom_id'  => 1,
+            'classroom_id'  => $place,
 
         ]);
 
         return $this;
+    }
+
+    public function selectClassroom($subject, $slotnum){
+        $lectureMethod = Subject::select('method')->where('subject_id',$subject)->first();
+        $courseStudents = Course::select('max_no_students')->where('course_code',$this->is_general)->first();
+
+        $method = $lectureMethod->method;
+        $students = $courseStudents->max_no_students;
+
+        $classrooms = Classroom::select('classroom_id')->where('method', $method)
+        ->where('student_capacity','>=',$students)->first();
+        return $classrooms->classroom_id;
     }
 
     public function isLecturerFree($seed, $lecturer_id){
