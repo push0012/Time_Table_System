@@ -36,6 +36,12 @@
                                 </div> 
                             </div>
                             <div class="form-group row">
+                                <label for="short_name" class="col-md-4 col-form-label text-md-right">{{ __('Short Name') }}</label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
+                                    <input class="form-control" type="text" name="short_name" id="short_name" placeholder="Short Name" />
+                                </div> 
+                            </div>
+                            <div class="form-group row">
                                 <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
                                     <input class="form-control" type="text" name="department" id="department" placeholder="Department" />
