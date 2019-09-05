@@ -65,8 +65,8 @@ $('#addSubject').on( 'click', function () {
         '<input type=\"text\" id=\"subject_title\" name=\"subject_title\" size=\"33\" required/>',
 
         '<select class=\"form-control\" name=\"method\" id=\"method\">'+
-            '<option value=\"Lecture\" selected>Lecture</option>'+
-            '<option value=\"Practical\">Practical</option>'+
+            '<option value=\"L\" selected>Lecture</option>'+
+            '<option value=\"P\">Practical</option>'+
         '</select>',
 
         '<select class=\"form-control\" name=\"needs\" id=\"needs\">'+
