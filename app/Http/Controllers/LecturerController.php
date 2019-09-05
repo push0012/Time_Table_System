@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Lecturer;
-
+use Auth;
 class LecturerController extends Controller
 {
     /**
@@ -35,9 +35,13 @@ class LecturerController extends Controller
      */
     public function store(Request $request)
     {
-        $lecturer = Lecturer::create($request->all());
+        $lecturer = $request->all();
 
-        return response()->json($lecturer, 201);
+        $lecturer['user_data'] = Auth::user()->email;
+        
+        $response = Lecturer::create($lecturer);
+
+        return response()->json($response, 201);
     }
 
     /**

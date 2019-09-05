@@ -43,7 +43,7 @@ class LecturerFreeController extends Controller
         
         $response = Lecturer_Free::create([
             'free_time' => implode(",",$request->free_time),
-            //'user_data' => Auth::user()->email,
+            'user_data' => Auth::user()->email,
             'lecturer_id' => $request->lecturer_id
             ]);
         return response()->json($response, 201);
