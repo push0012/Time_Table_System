@@ -9,6 +9,8 @@ var t = $('#example').DataTable({
     select: 'os'
 });
 
+$('#classTable').DataTable();
+
 //Define Subject Datatable
 var s = $('#subjectTable').DataTable({
     paging: false,
