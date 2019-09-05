@@ -43,9 +43,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+                            <label for="method" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="type" id="type">
+                                <select class="form-control" name="method" id="method">
                                     <option value="0" disabled selected>Select Type ...</option>
                                     <option value="CL">Computer Lab</option>
                                     <option value="CR">Class Room</option>
@@ -62,6 +62,7 @@
                         <center>
                          <button class="default-big-btn" type="submit" value="Login">Submit</button>
                          <button class="default-big-btn form-cancel" type="reset" value="">Cancel</button>
+                         <a class="default-big-btn form-cancel" href="{{url('classroom')}}" value="">Back</a>
                      </center>
                  </div>
              </div>
