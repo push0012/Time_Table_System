@@ -4,6 +4,9 @@ namespace App\Services;
 
 use App\Classroom;
 use App\TimeTable;
+use App\TimeSlot;
+use App\Lecturer_Free;
+use Auth;
 
 class TimeTableGenerator {
 
@@ -236,18 +239,27 @@ class TimeTableGenerator {
            //if($rou <= $counting){
             for ($y = 0; $y < $this->daysOfWeek; $y++) {
                 for ($z = 0; $z < $this->sizeOfDay; $z++) {
-                    
-                    if ($this->hasAssigned($seed)){
-                        $out->writeln("hasAssigned seed ".$seed);
-                        $seed = $seed +1;
+
+
+                    $tslot = $this->findTimeSlot($y,$z);
+                    $slotnum = $tslot->slot_id;
+
+
+                    if ($this->hasAssigned($slotnum)){
+                        $out->writeln("hasAssigned seed ".$slotnum);
                         continue;
                     } 
-                    /*if ($this->isBreakTimeZone($seed)){
-                        $out->writeln("isbreak zone seed ".$seed);
-                        $seed = $seed +1;
+
+                    if ($this->isBreakTimeZone($z)){
+                        $out->writeln("isbreak zone seed ".$z);
                         continue;
-                    } */
-                    if($this->timeTable[$y][$z] == '-' && $z != 4){
+                    }
+
+                    if ($this->isLecturerFree($slotnum, $this->chromosomes[$x][2])){
+                        $out->writeln("Lecturer does not free seed ".$slotnum);
+                        continue;
+                    } 
+
                         if($rou < $counting){
 
 
@@ -259,17 +271,17 @@ class TimeTableGenerator {
                                 ($this->chromosomes[$x][1] >=3 && $z == 6 && $rou == 0) ||
                                 ($y == 3 && ($z == 2 || $z == 3) )) {
                                 
-                                    $out->writeln("one period seed ".$seed);
-                                $seed = $seed + 1;
+                                    $out->writeln("one period seed ".$slotnum);
+                                //$seed = $seed + 1;
                                 continue;
                             }else{
-                                $out->writeln("With subject id is here ".$this->chromosomes[$x][0]." ".$seed);
-                                $out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$seed);
+                                $out->writeln("With subject id is here ".$this->chromosomes[$x][0]." ".$slotnum);
+                                $out->writeln("With lecturer id is here ".$this->chromosomes[$x][2]." ".$slotnum);
                                 $s = 0;$c = 1;
                                 $this->timeTable[$y][$z] = $this->chromosomes[$x][0];
-                                $this->savedata($this->chromosomes[$x], $y, $z);
-                                $this->usedSlots[] = $seed;
-                                $seed = $seed + 1;
+                                //$this->savedata($this->chromosomes[$x], $y, $z);
+                                $this->usedSlots[] = $slotnum;
+                                //$seed = $seed + 1;
                             }
 
                         }else{
@@ -277,12 +289,6 @@ class TimeTableGenerator {
                             continue;
 
                         } 
-                        
-                    }else{
-                        $out->writeln("condition seed ".$seed);
-                        $seed = $seed + 1;
-                        continue;
-                    }   
                     $rou=$rou+1;   
                 }
             }
@@ -309,6 +315,22 @@ class TimeTableGenerator {
 
         return $this;
     }
+
+    public function isLecturerFree($seed, $lecturer_id){
+        
+        $lecturer_frees = Lecturer_Free::select('free_time')->where('lecturer_id',$lecturer_id)->first();
+
+        $freetimes[] = $lecturer_frees->free_time;
+        
+        return in_array($seed,$freetimes);
+    }
+
+    public function findTimeSlot($dayofweek,$sizeofday){
+        $timeslots = TimeSlot::select('slot_id')->where('dayofweek', $dayofweek)
+        ->where('sizeofday', $sizeofday)->first();
+        
+        return $timeslots;
+    }
     /**
      * Check if the seed falls withing the break time zone
      * @param $seed
@@ -316,9 +338,10 @@ class TimeTableGenerator {
      */ 
     public function isBreakTimeZone($seed)
     {
-        if ($seed < $this->sizeOfDay)
+        /*if ($seed < $this->sizeOfDay)*/
             return $seed == $this->indexOfBreak;
-        return ($seed - $this->sizeOfDay) % $this->indexOfBreak === 0;
+        /*return ($seed - $this->sizeOfDay) % $this->indexOfBreak === 0;*/
+        
     }
 
     /**
