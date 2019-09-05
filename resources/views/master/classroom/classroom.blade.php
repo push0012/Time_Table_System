@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <select class="form-control" name="type" id="type">
                                     <option value="0" disabled selected>Select Type ...</option>
-                                    <option value="COM">Computer Lab</option>
+                                    <option value="CL">Computer Lab</option>
                                     <option value="CR">Class Room</option>
                                     <option value="WS">Workshop</option>
                                     <option value="LH">Large Hall</option>
