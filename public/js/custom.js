@@ -10,6 +10,9 @@ var t = $('#example').DataTable({
 });
 
 $('#classTable').DataTable();
+$('#courseTable').DataTable();
+$('#lecturerTable').DataTable();
+$('#subjectsTable').DataTable();
 
 //Define Subject Datatable
 var s = $('#subjectTable').DataTable({
