@@ -21,7 +21,7 @@
                                     <div class="form-group row">
                                         <label for="lecturer_id" class="col-md-2 col-form-label text-md-left">{{ __('Lecturer Name') }}</label>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
-                                            <select class="form-control text-md-left" name="lecturer_id" id="lecturer_id">
+                                            <select class="form-control text-md-left" name="lecturer_id">
                                                 <option value="0" disabled selected>Select Lecturer ...</option>
                                                 @foreach($lecturers as $lecturer)
                                                 <option value="{{$lecturer->lecturer_id}}">
