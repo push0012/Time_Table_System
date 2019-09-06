@@ -173,7 +173,7 @@
                                     
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" >Generate Time Table</button>
+                                        <a type="button" class="btn btn-danger" href="{{url('createGenerator')}}" >Generate Time Table</a>
                                     </div>
                                 </div>
                                 </div>
