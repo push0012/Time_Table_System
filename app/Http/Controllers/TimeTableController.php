@@ -39,15 +39,41 @@ class TimeTableController extends Controller
         }*/
 
         try{
+            $schedules = TimeTable::where('course_code', $condition['course_code'])
+                            ->where('semester',$condition['semester'])
+                            ->where('ac_year', $condition['ac_year'])->get()->count();
             $timeTable =  new TimeTableGenerator($coz_subs);
+            if($schedules>0){
+                TimeTable::where('course_code', $condition['course_code'])
+                ->where('semester',$condition['semester'])
+                ->where('ac_year', $condition['ac_year'])->delete();
+
+                $timeTable = $timeTable->generate(
+                    $condition['course_code'],
+                    $condition['semester'],
+                    $condition['ac_year'],
+                    $condition['start_date'],
+                    $condition['end_date']
+                );
+            }else{
+                $timeTable = $timeTable->generate(
+                    $condition['course_code'],
+                    $condition['semester'],
+                    $condition['ac_year'],
+                    $condition['start_date'],
+                    $condition['end_date']
+                );
+            }
+
+            
             //$timeTable->levelWideCourse(json_decode($levelWideCourses, true));
-            $timeTable = $timeTable->generate(
+            /*$timeTable = $timeTable->generate(
                 $condition['course_code'],
                 $condition['semester'],
                 $condition['ac_year'],
                 $condition['start_date'],
                 $condition['end_date']
-            );
+            );*/
 
             /*if ($table->alreadyHas($condition)) {
                 $table->where($condition)->update(['schedule' => json_encode($timeTable) ]);
