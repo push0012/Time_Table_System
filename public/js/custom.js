@@ -27,7 +27,7 @@ var s = $('#subjectTable').DataTable({
 //automattically create lecturer dropdown 
 $.ajax({
     type: "GET",
-    url: '/lecturer',
+    url: '/lecturers',
     success: function( msg ) {
         $.each(msg, function(value,key) {  
             $("#lecturer_id").append($("<option>").attr("value", key.lecturer_id).text(key.title+" "+key.last_name+" "+key.initial));   
