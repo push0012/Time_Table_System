@@ -32,14 +32,17 @@
                             </a>
                         </div>
                     </div>
+                    @guest
+                    <div class="col-lg-8 col-md-8 col-sm-8 text-left"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 text-left">
+                        <a class="cp-default-btn" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </div>
+                    @else
                     <div class="col-lg-6 col-md-8 col-sm-6 possition-static">
                         <div class="cp-main-menu">
                             <nav>
                                 <ul>
-                                    <li class="active"><a href="#">Home</a>
-                                        <ul class="cp-dropdown-menu">
-                                            <li class="active"><a href="{{ route('login') }}">Home</a></li>
-                                        </ul>
+                                    <li class="active"><a href="{{ route('login') }}">Home</a>
                                     </li>
 
                                     <li class="menu-justify current"><a href="#">Pages</a>
@@ -48,50 +51,36 @@
                                                 <div class="row" >
                                                     <div class="col-sm-3">
                                                         <ul class="rt-mega-items">
-                                                            <li><a href="{{ route('login') }}">Home</a></li>
-                                                            <li><a href="{{ url('classroom/create') }}">Class Room</a></li>
-
+                                                            <li><a href="{{ url('classroom') }}">Class Room</a></li>
+                                                            
                                                         </ul>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <ul class="rt-mega-items">
-                                                            <li><a href="{{ url('course/create') }}">Course</a></li>
-                                                            <li><a href="{{ url('lecturer/create') }}">Lecturer</a></li>
-
+                                                            <li><a href="{{ url('lecturer') }}">Lecturer</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <ul class="rt-mega-items">
-                                                            <li><a href="{{ url('subject/create') }}">Subject</a></li>
-                                                            <li><a href="{{ url('lecturer_free/create') }}">Free Times</a></li>
-
+                                                            <li><a href="{{ url('course') }}">Course</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <ul class="rt-mega-items"></ul>
+                                                        <ul class="rt-mega-items">
+                                                            <li><a href="{{ url('subject') }}">Subject</a></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="features.html">Features</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="#">Features</a></li>
+                                    <li><a href="#">Contact</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                    @guest
-                    <div class="col-lg-2 col-md-2 col-sm-3 text-right">
-                        
-                        <a class="cp-default-btn" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </div>
-                    @if (Route::has('register'))
-                    <div class="col-lg-2 col-md-2 col-sm-3 text-right">
-                        
-                        <a class="cp-default-btn" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </div>
-                    @endif
-                    @else
+                    
                     <div class="col-lg-2 col-md-2 col-sm-3 text-right">
                         <strong id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
