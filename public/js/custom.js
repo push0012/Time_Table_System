@@ -13,6 +13,7 @@ $('#classTable').DataTable();
 $('#courseTable').DataTable();
 $('#lecturerTable').DataTable();
 $('#subjectsTable').DataTable();
+$('#planningTable').DataTable();
 
 //Define Subject Datatable
 var s = $('#subjectTable').DataTable({
