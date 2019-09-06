@@ -11,6 +11,7 @@ use App\Course;
 use App\TimeTable;
 use DB;
 use App\Services\TimeTableGenerator;
+use PDF;
 
 use Illuminate\Http\Request;
 
@@ -59,7 +60,8 @@ class TimeTableController extends Controller
                     'schedule'      => json_encode($timeTable)
                 ]);*/
             //}
-            return response()->json($timeTable, 201);
+            //return response()->json($timeTable, 201);
+            return redirect('/home');
         } catch (\Exception $e)
         {
             return response()->json($e, 400);
@@ -71,7 +73,29 @@ class TimeTableController extends Controller
         $condition = request()->all();
 
         $timetables = DB::table('final_timeltable')->where($condition)->get();
+        $dates = CourseSubject::select('start_date','end_date','ac_year')
+                    ->where('ac_year',$condition['ac_year'])
+                    ->where('semester',$condition['semester'])
+                    ->first();   
+
+        $course = $condition['course_name'];
+        $semester = $condition['semester'];
+
         //$timetables =  TimeTable::all();
-        return view('genarate.timetable')->with('timetables', $timetables);;
+        //return view('genarate.timetable')->with('timetables', $timetables);;
+
+        //$data = Customer::get();
+        // Send data to the view using loadView function of PDF facade
+        $pdf = PDF::loadView('genarate.timetablepdf',compact('timetables','course','semester','dates'))->setPaper('A4','landscape');
+        return $pdf->stream('timetablepdf.pdf');
+        // If you want to store the generated pdf to the server then you can use the store function
+        /*$pdf->save(storage_path().'_filename.pdf');
+        // Finally, you can download the file using download function
+        return $pdf->download('timetable.pdf');*/
     }
+    public function createGenerator(){
+        $courses = Course::all();
+        return view('genarate.generate')->with('courses',$courses);
+    }
+
 }
