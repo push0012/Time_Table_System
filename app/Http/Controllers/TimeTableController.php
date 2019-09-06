@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 
 class TimeTableController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function generate(CourseSubject $course_subject, TimeTable $table)
     {
         $condition = request()->all();
