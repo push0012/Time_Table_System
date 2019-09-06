@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                             <div class="modal fade" id="myModal">
-                                <div class="modal-dialog modal-lg" style="width:100%;">
+                                <div class="modal-dialog modal-lg" style="width:50%;">
                                 <div class="modal-content">
                                 
                                     <!-- Modal Header -->
