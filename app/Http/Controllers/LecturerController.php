@@ -21,6 +21,10 @@ class LecturerController extends Controller
        $lecturers =  Lecturer::all();
        return view('master.lecturer.viewlecturer')->with('lecturers',$lecturers);
     }
+    public function getLecturer(){
+        $lecturers =  Lecturer::all();
+        return response()->json($lecturers, 201);
+    }
 
     /**
      * Show the form for creating a new resource.
