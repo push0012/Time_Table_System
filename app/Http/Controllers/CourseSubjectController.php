@@ -17,7 +17,16 @@ class CourseSubjectController extends Controller
      */
     public function index()
     {
-        return CourseSubject::all();
+        $condition = request()->all();
+        $course =  Course::select('course_code','course_name')->where('course_code', $condition['course_code'])->first();
+        //$cuz =  CourseSubject::select('start_date','end_date')->where($condition)->first()->groupby('course_code');
+        $coz_subs =  CourseSubject::where($condition)->get();
+        return view('genarate.viewplanning')
+        ->with('cuz_subs',$coz_subs)
+        //->with('cuz',$cuz)
+        ->with('course',$course)
+        ->with('semester', $condition['semester'])
+        ->with('ac_year', $condition['ac_year']);
     }
 
     /**
