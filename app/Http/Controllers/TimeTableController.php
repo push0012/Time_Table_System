@@ -67,7 +67,10 @@ class TimeTableController extends Controller
     }
 
     public function viewTimeTable(){
-        $timetables = DB::table('final_timeltable')->get();
+        
+        $condition = request()->all();
+
+        $timetables = DB::table('final_timeltable')->where($condition)->get();
         //$timetables =  TimeTable::all();
         return view('genarate.timetable')->with('timetables', $timetables);;
     }
