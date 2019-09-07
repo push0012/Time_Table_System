@@ -73,6 +73,7 @@ $('#addSubject').on( 'click', function () {
         '<select class=\"form-control\" name=\"method\" id=\"method\">'+
             '<option value=\"L\" selected>Lecture</option>'+
             '<option value=\"P\">Practical</option>'+
+            '<option value=\"C\">Confirence</option>'+
         '</select>',
 
         '<select class=\"form-control\" name=\"needs\" id=\"needs\">'+
