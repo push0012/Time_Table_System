@@ -323,8 +323,8 @@ class TimeTableGenerator {
         $tables = $tablesave->create([
             'course_code'   => $this->is_general,
             'batch'         => 'B2',
-            'semester'      => 1,
-            'ac_year'       => 2019,
+            'semester'      => $this->this_semester,
+            'ac_year'       => $this->this_ac_year,
             'subject_id'    => $cromesom[0],
             'dayofweek'     => $y,
             'sizeofday'     => $z,
