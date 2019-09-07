@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Edit Course Details')
 @section('content')
 <section class="s-space-bottom-full bg-accent-shadow-body">
             <div class="container">
@@ -10,12 +10,12 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="gradient-wrapper item-mb">
                             <div class="gradient-title">
-                                <h2>Add Course Details</h2>
+                                <h2>Edit Course Details</h2>
                             </div>
                             <div class="input-layout1 gradient-padding">
                                
                                 <div class="section-title-left-dark child-size-xl title-bar item-mb">
-                                    <h3>Add Course Here</h3>
+                                    <h3>Edit Course Here</h3>
                                 </div> 
                                 <form method="POST" action="{{ route('course.update',$courses->course_code ) }}" name="classroom">
                                     @method('PATCH')

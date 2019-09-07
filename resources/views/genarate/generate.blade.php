@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Time Table Generation')
 @section('content')
 
 <section class="s-space-bottom-full bg-accent-shadow-body">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Register')
 @section('content')
 <div class="container" id="isotope-container">
         <div class="section-title-dark">
