@@ -61,7 +61,7 @@ class CourseSubjectController extends Controller
             'lecturer_id'=>$request->lecturer_id,
             'user_data'=>Auth::user()->email,
         ]);
-        return response()->json($resource, 201);
+        return redirect('/course_subject')->with('success', 'Semester Plan was added');
     }
 
     /**
