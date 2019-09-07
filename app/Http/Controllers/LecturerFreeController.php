@@ -43,6 +43,8 @@ class LecturerFreeController extends Controller
         
         $response = Lecturer_Free::create([
             'free_time' => implode(",",$request->free_time),
+            'start_date'=>$request->start_date,
+            'end_date'=>$request->end_date,
             'user_data' => Auth::user()->email,
             'lecturer_id' => $request->lecturer_id
             ]);
