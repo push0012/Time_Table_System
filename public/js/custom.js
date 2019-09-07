@@ -147,7 +147,7 @@ $('#reddit').on('click', function() {
             url: '/course_subject',
             data: postData,
             success: function( msg ) {
-                console.log( msg);
+                document.location = '/course_subject';
             },
             error: function(msg) {
                 console.log(msg);
@@ -178,7 +178,7 @@ $('#redditSubject').on('click', function() {
             url: '/subject',
             data: postDataSubject,
             success: function( msg ) {
-                console.log( msg);
+                document.location = '/subject';
             },
             error: function(msg) {
                 console.log(msg);
