@@ -48,7 +48,7 @@ class LecturerFreeController extends Controller
             'user_data' => Auth::user()->email,
             'lecturer_id' => $request->lecturer_id
             ]);
-        return response()->json($response, 201);
+            return redirect('/lecturer')->with('success', 'Lecturer was added');
     }
 
     /**
