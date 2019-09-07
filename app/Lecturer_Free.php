@@ -12,6 +12,8 @@ class Lecturer_Free extends Model
 
     protected $fillable = [
         'free_time',
+        'start_date',
+        'end_date',
         'user_data',
         'lecturer_id'
     ];
