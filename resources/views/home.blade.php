@@ -61,8 +61,8 @@
                                             <div class="form-group row">
                                                 <label for="course_code" class="col-md-4 col-form-label text-md-left">{{ __('Course') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="course_code" id="course_code">
-                                                        <option value="0" disabled selected>Select Course ...</option>
+                                                    <select class="form-control" name="course_code" id="course_code" required>
+                                                        <option value="" disabled selected>Select Course ...</option>
                                                         @foreach($courses as $course)
                                                         <option value="{{ $course->course_code}}">{{ $course->course_name}}</option>
                                                         @endforeach
@@ -72,8 +72,8 @@
                                             <div class="form-group row">
                                                 <label for="semester" class="col-md-4 col-form-label text-md-left">{{ __('Semester') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="semester" id="semester">
-                                                        <option value="0" disabled selected>Select Semester ...</option>
+                                                    <select class="form-control" name="semester" id="semester" required>
+                                                        <option value="" disabled selected>Select Semester ...</option>
                                                         <option value="1">Semester 01</option>
                                                         <option value="2">Semester 02</option>
                                                         <option value="3">Semester 03</option>
@@ -86,8 +86,8 @@
                                             <div class="form-group row">
                                                 <label for="ac_year" class="col-md-4 col-form-label text-md-left">{{ __('Academic Year') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="ac_year" id="ac_year">
-                                                        <option value="0" disabled selected>Select Year ...</option>
+                                                    <select class="form-control" name="ac_year" id="ac_year" required>
+                                                        <option value="" disabled selected>Select Year ...</option>
                                                         @for ($i = 2016; $i <= 2020; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                         @endfor
@@ -132,8 +132,8 @@
                                             <div class="form-group row">
                                                 <label for="course_code" class="col-md-4 col-form-label text-md-left">{{ __('Course') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="course_name" id="course_name">
-                                                        <option value="0" disabled selected>Select Course ...</option>
+                                                    <select class="form-control" name="course_name" id="course_name" required>
+                                                        <option value="" disabled selected>Select Course ...</option>
                                                         @foreach($courses as $course)
                                                         <option value="{{ $course->course_name}}">{{ $course->course_name}}</option>
                                                         @endforeach
@@ -143,8 +143,8 @@
                                             <div class="form-group row">
                                                 <label for="semester" class="col-md-4 col-form-label text-md-left">{{ __('Semester') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="semester" id="semester">
-                                                        <option value="0" disabled selected>Select Semester ...</option>
+                                                    <select class="form-control" name="semester" id="semester" required>
+                                                        <option value="" disabled selected>Select Semester ...</option>
                                                         <option value="1">Semester 01</option>
                                                         <option value="2">Semester 02</option>
                                                         <option value="3">Semester 03</option>
@@ -157,8 +157,8 @@
                                             <div class="form-group row">
                                                 <label for="ac_year" class="col-md-4 col-form-label text-md-left">{{ __('Academic Year') }}</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" name="ac_year" id="ac_year">
-                                                        <option value="0" disabled selected>Select Year ...</option>
+                                                    <select class="form-control" name="ac_year" id="ac_year" required>
+                                                        <option value="" disabled selected>Select Year ...</option>
                                                         @for ($i = 2016; $i <= 2020; $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                         @endfor
