@@ -259,26 +259,25 @@ class TimeTableGenerator {
 
                     $slotnum = $this->findTimeSlot($y,$z);
                     //$out->writeln("hasAssigned seed ".$slotnum);
-
+                   
 
                     if ($this->hasAssigned($slotnum)){
                         //$out->writeln("hasAssigned seed ".$slotnum);
                         continue;
                     } 
-
+                    
                     if ($this->isBreakTimeZone($z)){
                         //$out->writeln("isbreak zone seed ".$z);
                         continue;
                     }
+                   
                     //$out->writeln($this->isLecturerFree($slotnum, 5));
                     if (!($this->isLecturerFree($slotnum, $this->chromosomes[$x][2]))){
-                        //$out->writeln("Lecturer does not free seed ".$slotnum);
                         continue;
                     }
 
                         if($rou < $counting){
-
-
+                            
                             if(($rou == 0 && $z == 3) || 
                                 ($this->chromosomes[$x][1] >=3 && $z == 2 && $rou == 0) || 
                                 ($this->chromosomes[$x][1] >=3 && $z == 1 && $rou == 0) ||
@@ -388,16 +387,16 @@ class TimeTableGenerator {
     }
 
     public function isLecturerFree($seed, $lecturer_id){
-        
         $lecturer_frees = Lecturer_Free::select('free_time')
         ->where('lecturer_id',$lecturer_id)
         ->where('start_date',$this->this_start_date)
         ->where('end_date',$this->this_end_date)
         ->first();
+        
         $temp = $lecturer_frees->free_time;
         $temp2 = explode(",", $temp);  
         $freetimes = $this->bubble_Sort($temp2);
-
+        $out->writeln("pass 5 ");
         return in_array($seed , $freetimes);
     }
     public function bubble_Sort($my_array)
