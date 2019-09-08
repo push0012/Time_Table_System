@@ -56,7 +56,7 @@ class SubjectController extends Controller
             'user_data'=>Auth::user()->email,
         ]);
         
-        return response()->json($resource, 201);
+        return redirect('/subject')->with('success', 'Subjects were added');
     }
 
     /**

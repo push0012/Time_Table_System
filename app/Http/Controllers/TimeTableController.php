@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CourseSubject;
+use App\RoomAllocation;
 use App\Subject;
 use App\Classroom;
 use App\Lecturer;
@@ -46,6 +47,11 @@ class TimeTableController extends Controller
             if($schedules>0){
                 TimeTable::where('course_code', $condition['course_code'])
                 ->where('semester',$condition['semester'])
+                ->where('ac_year', $condition['ac_year'])->delete();
+
+                RoomAllocation::where('course_code', $condition['course_code'])
+                ->where('start_date',$condition['start_date'])
+                ->where('end_date',$condition['end_date'])
                 ->where('ac_year', $condition['ac_year'])->delete();
 
                 $timeTable = $timeTable->generate(

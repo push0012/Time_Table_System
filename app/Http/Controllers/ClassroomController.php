@@ -45,7 +45,8 @@ class ClassroomController extends Controller
         $classroom['user_data'] = Auth::user()->email;
 
         $response = Classroom::create($classroom);
-        return response()->json($response, 201);
+        return redirect('/classroom')->with('success', 'Classroom was added');
+        //return response()->json($response, 201);
     }
 
     /**

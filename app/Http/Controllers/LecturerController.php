@@ -50,7 +50,7 @@ class LecturerController extends Controller
         
         $response = Lecturer::create($lecturer);
 
-        return response()->json($response, 201);
+        return redirect('/lecturer')->with('success', 'Lecturer was added');
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Add Class Rooms')
 @section('content')
 <section class="s-space-bottom-full bg-accent-shadow-body">
     <div class="container">
@@ -47,10 +47,9 @@
                             <div class="col-md-6">
                                 <select class="form-control" name="method" id="method">
                                     <option value="0" disabled selected>Select Type ...</option>
-                                    <option value="CL">Computer Lab</option>
-                                    <option value="CR">Class Room</option>
-                                    <option value="WS">Workshop</option>
-                                    <option value="LH">Large Hall</option>
+                                    <option value="P">Computer Lab</option>
+                                    <option value="L">Class Room</option>
+                                    <option value="C">Large Hall</option>
                                 </select>
                             </div>
                         </div>

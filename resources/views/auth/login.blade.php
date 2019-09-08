@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Login')
 @section('content')
 <section class="bg-body ">
     <div class="container" id="isotope-container">

@@ -7,8 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Time Table Schedule System') }}</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('image/uni.png') }}" />
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }} " type="text/javascript" defer></script>
     <!-- Modernizr Js -->

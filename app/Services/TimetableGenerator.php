@@ -323,8 +323,8 @@ class TimeTableGenerator {
         $tables = $tablesave->create([
             'course_code'   => $this->is_general,
             'batch'         => 'B2',
-            'semester'      => 1,
-            'ac_year'       => 2019,
+            'semester'      => $this->this_semester,
+            'ac_year'       => $this->this_ac_year,
             'subject_id'    => $cromesom[0],
             'dayofweek'     => $y,
             'sizeofday'     => $z,
@@ -389,7 +389,11 @@ class TimeTableGenerator {
 
     public function isLecturerFree($seed, $lecturer_id){
         
-        $lecturer_frees = Lecturer_Free::select('free_time')->where('lecturer_id',$lecturer_id)->first();
+        $lecturer_frees = Lecturer_Free::select('free_time')
+        ->where('lecturer_id',$lecturer_id)
+        ->where('start_time',$this->this_start_date)
+        ->where('end_time',$this->this_end_date)
+        ->first();
         $temp = $lecturer_frees->free_time;
         $temp2 = explode(",", $temp);  
         $freetimes = $this->bubble_Sort($temp2);

@@ -47,7 +47,7 @@ class CourseController extends Controller
 
         $response = Course::create($course);
 
-        return response()->json($response, 201);
+        return redirect('/course')->with('success', 'Course was added');
     }
 
     /**

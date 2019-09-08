@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Add Lecturer's Free Timeslots')
 @section('content')
 <section class="s-space-bottom-full bg-accent-shadow-body">
     <div class="container">
@@ -29,6 +29,18 @@
                                                 </option>
                                                 @endforeach
                                             </select>
+                                        </div> 
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="start_date" class="col-md-2 col-form-label text-md-left">{{ __('Start Date') }}</label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
+                                            <input class="form-control" type="date" name="start_date" id="start_date" />
+                                        </div> 
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="end_date" class="col-md-2 col-form-label text-md-left">{{ __('End Date') }}</label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-mb-6">
+                                            <input class="form-control" type="date" name="end_date" id="end_date" />
                                         </div> 
                                     </div>
                                 <table class="table">
