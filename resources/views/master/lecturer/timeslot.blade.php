@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Add Lecturers Free Timeslots')
+@section('title', 'Add Lecturer Free Timeslots')
 @section('content')
 <section class="s-space-bottom-full bg-accent-shadow-body">
     <div class="container">
