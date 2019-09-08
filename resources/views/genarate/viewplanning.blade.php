@@ -50,7 +50,7 @@
                                 <td>{{$cuz_sub->notional_hours}}</td>
                                 <td>{{$cuz_sub->lesson_hours}}</td>
                                 <td>{{$cuz_sub->week_lesson_hours}}</td>
-                                <td>{{$cuz_sub->lecturer_id}}</td>
+                                <td>{{$cuz_sub->title}} {{ $cuz_sub->initial}} {{$cuz_sub->last_name}}</td>
                                 <td>
                                     <a class="btn btn-outline-primary btn-sm" href="{{ url('course_subject/'.$course['course_code'].'/'.$semester.'/'.$ac_year.'/'.$cuz_sub->subject_id.'/edit') }}">
                                     <i class="far fa-edit"></i>
