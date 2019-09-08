@@ -7,9 +7,9 @@ use App\CourseSubject;
 use App\Subject;
 use App\Course;
 use Auth;
-
+use DB;
 class CourseSubjectController extends Controller
-{
+{ 
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +20,9 @@ class CourseSubjectController extends Controller
         $condition = request()->all();
         $course =  Course::select('course_code','course_name')->where('course_code', $condition['course_code'])->first();
         //$cuz =  CourseSubject::select('start_date','end_date')->where($condition)->first()->groupby('course_code');
-        $coz_subs =  CourseSubject::where($condition)->get();
+        $coz_subs = DB::table('getCourseSubject')->where($condition)->get();
+        
+        //$coz_subs =  CourseSubject::where($condition)->get();
         return view('genarate.viewplanning')
         ->with('cuz_subs',$coz_subs)
         //->with('cuz',$cuz)
