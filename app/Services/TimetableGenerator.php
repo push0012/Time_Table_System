@@ -391,8 +391,8 @@ class TimeTableGenerator {
         
         $lecturer_frees = Lecturer_Free::select('free_time')
         ->where('lecturer_id',$lecturer_id)
-        ->where('start_time',$this->this_start_date)
-        ->where('end_time',$this->this_end_date)
+        ->where('start_date',$this->this_start_date)
+        ->where('end_date',$this->this_end_date)
         ->first();
         $temp = $lecturer_frees->free_time;
         $temp2 = explode(",", $temp);  
