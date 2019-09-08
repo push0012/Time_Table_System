@@ -28,7 +28,7 @@ class TimeTableController extends Controller
         if (!isset($condition['course_code'])) $condition['course_code'] = 0;
         
         $coz_subs = $course_subject->where($condition)->get()->toArray();
- 
+        
         /*$levelWideCourses = null;
         $newCondition = $condition;
         $newCondition['course_code'] = 0;
